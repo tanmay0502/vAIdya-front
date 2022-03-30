@@ -6,7 +6,7 @@ import SpeechRecognition, {
 
   import { useSpeechSynthesis } from "react-speech-kit";
  
-import axios from "axios";
+// import axios from "axios";
 
 function Button(props){
 
@@ -171,10 +171,10 @@ function Button(props){
               body: JSON.stringify({ symptoms: yoursymptoms }),
             };
             
-            // https://limitless-cliffs-12735.herokuapp.com/api/
-            fetch('http://0.0.0.0:5000/api/', requestOptions)
+            fetch('https://limitless-cliffs-12735.herokuapp.com/api/', requestOptions)
             .then(response => response.json())
             .then(data => {
+              console.log(data)
               const disease = data.disease;
               const description = data.description;
               speak({text:`You are suffering from ${disease}. ${description}`});
