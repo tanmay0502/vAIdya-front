@@ -6,7 +6,7 @@ import SpeechRecognition, {
 
   import { useSpeechSynthesis } from "react-speech-kit";
  
-
+import axios from "axios";
 
 function Button(props){
 
@@ -165,10 +165,20 @@ function Button(props){
             })
         
             console.log(yoursymptoms); //symptoms goes to backend
-        
-            const disease="cancer"; //disease name comes from backend
-        
-            speak({text:`You are suffering from ${disease}. Reach out your nearest doctor as soon as possible.`})
+            const requestOptions = {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'User-Agent':'PostmanRuntime/7.29.0' },
+              body: JSON.stringify({ symptoms: yoursymptoms }),
+            };
+            
+            // https://limitless-cliffs-12735.herokuapp.com/api/
+            fetch('http://0.0.0.0:5000/api/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+              const disease = data.disease;
+              const description = data.description;
+              speak({text:`You are suffering from ${disease}. ${description}`});
+            })
           }
         
     return(
