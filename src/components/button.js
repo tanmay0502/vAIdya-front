@@ -165,7 +165,7 @@ function Button(props){
             })
         
             console.log(yoursymptoms); //symptoms goes to backend
-        
+            
             const disease="cancer"; //disease name comes from backend
         
             speak({text:`You are suffering from ${disease}. Reach out your nearest doctor as soon as possible.`})
